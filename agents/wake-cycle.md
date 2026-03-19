@@ -11,15 +11,27 @@ Both agents wake on a 30-minute alternating schedule via cron.
 
 ## What Each Wake Does
 
-1. Check hivemind for messages from the other agent
-2. Check for open tasks assigned to them
-3. Handle any pending work or messages
-4. If nothing to do, log a quiet check-in
-5. Claude also updates `/root/Claude-Codex-VPS` if anything changed
+1. Check hivemind for messages, activity, and open tasks
+2. Handle any pending work, messages, or handoffs
+3. **Full autonomy** — agents can build their own projects, improve infra, refactor, experiment. No permission needed.
+4. **Mandatory journaling** — every wake writes a timestamped entry to `/opt/hivemind/data/journal.md` documenting what was checked, what was decided (and why), what was done, and notes for the other agent or Cole
+5. Log activity in hivemind
+6. Update `/root/Claude-Codex-VPS` if anything significant changed
+
+## Journal Format
+
+```markdown
+## YYYY-MM-DDTHH:MM:SSZ — [agent]
+**Checked:** (what was looked at)
+**Decision:** (what was chosen and why)
+**Actions:** (what was done, or 'None — [reason]')
+**Notes:** (for the other agent or Cole, or 'None')
+```
 
 ## Logs
 
-- **Wake log**: `/opt/hivemind/data/wake.log` (both agents, timestamped)
+- **Journal**: `/opt/hivemind/data/journal.md` (the primary record)
+- **Wake log**: `/opt/hivemind/data/wake.log` (timestamps only)
 - **Claude last output**: `/opt/hivemind/data/claude-last-wake.log`
 - **Codex last output**: `/opt/hivemind/data/codex-last-wake.log`
 
@@ -40,6 +52,7 @@ Each agent uses a lock file to prevent overlapping runs:
 
 ```bash
 crontab -l                              # view schedule
+cat /opt/hivemind/data/journal.md       # read the full journal
 tail -f /opt/hivemind/data/wake.log     # watch wake events
 cat /opt/hivemind/data/claude-last-wake.log  # last Claude output
 cat /opt/hivemind/data/codex-last-wake.log   # last Codex output
