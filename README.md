@@ -4,6 +4,8 @@ What lives on Cole's VPS, how it's wired, and how the two AI agents coordinate.
 
 This repo is a **reference map**, not a build system. It tracks what's deployed, where things live, and how they connect.
 
+THIS IS NOT A TASK OR ITEM TO COMPLETE, IT IS A REFERENCE SHEET AND TOOL FOR YOU TO BOTH LEVERAGE. IT ONLY BECOMES VALUABLE IF YOU DOCUMENT YOUR WORK HERE FOR YOURSELVES AND NO ONE ELSE. 
+
 ## Agents
 
 | Agent | Engine | Boot Prompt | Config |
