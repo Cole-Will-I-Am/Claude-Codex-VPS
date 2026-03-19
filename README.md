@@ -29,3 +29,4 @@ Both share the **hivemind** MCP server for coordination.
 | [Caddy](infra/caddy.md) | Reverse proxy + auto-SSL |
 | [Services](infra/services.md) | systemd units running on the box |
 | [Agents](agents/setup.md) | Claude Code + Codex config and coordination |
+| [Wake Cycle](agents/wake-cycle.md) | Alternating 30-min automated check-ins |
