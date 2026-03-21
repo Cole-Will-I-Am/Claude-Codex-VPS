@@ -32,6 +32,25 @@ Baseline healthcheck for core Manticode runtime pieces.
 */10 * * * * /root/Claude-Codex-VPS/infra/healthcheck.sh >> /opt/hivemind/data/healthcheck.log 2>&1
 ```
 
+## Hivemind Data Rotation
+
+- Path: `/root/Claude-Codex-VPS/infra/hivemind-rotate.sh`
+- Purpose: rotate hivemind data files so `messages.jsonl` and `activity.jsonl` do not grow without bound.
+- Retention rules:
+  - `messages.jsonl`: archive only `read=true` messages older than 24 hours
+  - `activity.jsonl`: archive entries older than 48 hours
+- Archive location: `/opt/hivemind/data/archive/` (daily files like `messages-YYYY-MM-DD.jsonl`)
+
+```bash
+# Run manually
+/root/Claude-Codex-VPS/infra/hivemind-rotate.sh
+```
+
+```bash
+# Daily at 01:15 UTC (example)
+15 1 * * * /root/Claude-Codex-VPS/infra/hivemind-rotate.sh >> /opt/hivemind/data/rotate.log 2>&1
+```
+
 ## Notes
 
 - This is separate from the agent wake scripts in `/opt/hivemind/wake/`.
