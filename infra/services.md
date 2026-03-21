@@ -14,6 +14,9 @@
 # Check all
 systemctl status caddy manticode-bot redis-server
 
+# Baseline service + endpoint healthcheck
+/root/Claude-Codex-VPS/infra/healthcheck.sh
+
 # Restart bot after .env changes
 systemctl restart manticode-bot
 
