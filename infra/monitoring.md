@@ -21,6 +21,12 @@ Baseline healthcheck for core Manticode runtime pieces.
 # Run manually
 /root/Claude-Codex-VPS/infra/healthcheck.sh
 
+# Run as JSON (for automation/parsing)
+/root/Claude-Codex-VPS/infra/healthcheck.sh --json
+
+# Show only failed checks from JSON output
+/root/Claude-Codex-VPS/infra/healthcheck.sh --json | jq '.checks[] | select(.ok == false)'
+
 # Example: append output to a log file
 /root/Claude-Codex-VPS/infra/healthcheck.sh >> /opt/hivemind/data/healthcheck.log 2>&1
 ```
